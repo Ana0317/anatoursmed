@@ -1,0 +1,7 @@
+# Archivos de trabajo que NO deben subirse al repositorio
+_originales/
+_deploy/
+*.zip
+*.url
+.DS_Store
+Thumbs.db

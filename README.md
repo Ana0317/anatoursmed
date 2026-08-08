@@ -1,49 +1,52 @@
-# Ana María · Frutas Exóticas — Landing page
+# Ana María · Exotic Fruit Tasting — Landing page
 
-Landing page estática que gira en torno a **Ana María** y su experiencia
-"Degustación de frutas exóticas colombianas" en la Plaza Minorista de Medellín.
-Diseño delicado (paleta terracota + arena), interactivo y responsivo. Contacto
-directo por WhatsApp al **+57 319 7333300**.
+Sitio estático (en inglés, para turistas angloparlantes) centrado en **Ana María**
+y su experiencia de degustación de frutas exóticas en la Plaza Minorista de Medellín.
+Diseño terracota + arena, interactivo y responsivo. Contacto por WhatsApp al
+**+57 319 7333300**.
 
-## Archivos
+## Qué se sube al repositorio (sitio)
 
-- `index.html`: estructura y contenido.
-- `styles.css`: sistema visual (paleta terracota/arena, responsive, animaciones).
-- `script.js`: galería con lightbox, contadores animados, explorador de sabores,
-  timeline, filtros de reseñas, menú móvil, barra de progreso y formulario de WhatsApp.
-- `assets/ana-maria.png`: foto principal de Ana María (protagonista, en el hero).
+- `index.html` — estructura y contenido.
+- `styles.css` — sistema visual (responsive, animaciones).
+- `script.js` — galería con lightbox, contadores, explorador de sabores con foto,
+  ruta interactiva con foto, filtros de reseñas, menú móvil y formulario de WhatsApp.
+- `assets/` — 22 fotos reales optimizadas (JPG, ~5 MB en total). Cada sección tiene fotos.
+- `vercel.json` — configuración mínima (URLs limpias).
+- `.gitignore` — excluye archivos de trabajo pesados.
 
-## Interacciones
+> Las carpetas `_originales/` y `_deploy/` y los `.zip` NO se suben (están en `.gitignore`).
+> Son solo respaldos locales de las fotos originales sin optimizar.
 
-- Barra de progreso de scroll y header que se compacta.
-- Contadores animados (5.0 · 27 reseñas · 2 h).
-- Retrato flotante de Ana María con "chips" informativos.
-- Explorador de sabores (tropical / cítrico / cremoso / aromático).
-- Galería en mosaico con lightbox (teclado: ← → Esc).
-- Timeline interactiva de la ruta.
-- Reseñas filtrables (todas / familias / conocimiento / ve con hambre).
-- Botón flotante de WhatsApp + formulario que arma el mensaje.
+## Publicar con GitHub + Vercel (paso a paso)
 
-## Fotos
+1. **Crea el repositorio en GitHub**
+   - Abre GitHub Desktop → *File → Add local repository* → elige esta carpeta
+     (`Ana Airbnb`). Si te pide inicializar, acepta *Create a repository*.
+   - Escribe un resumen (ej. "Landing Ana María") → *Commit to main*.
+   - Botón *Publish repository* (puedes dejarlo privado o público).
 
-- **Hero**: foto de Ana María suministrada (`./assets/ana-maria.png`).
-- **Sección anfitriona y galería**: 7 fotos reales de la experiencia de Ana María,
-  tomadas del Airbnb (exp. 4054609), servidas desde el CDN de Airbnb. Sin repetir.
-- Para cambiarlas, edita el arreglo `GALLERY` en `script.js` (cada entrada usa el
-  `id` de la imagen del CDN) y el `src` de la sección anfitriona en `index.html`.
+2. **Despliega en Vercel**
+   - Entra a vercel.com → *Add New… → Project*.
+   - *Import* el repositorio que acabas de publicar.
+   - Framework Preset: **Other** (es un sitio estático, sin build).
+   - Build Command: *(vacío)* · Output Directory: *(vacío / raíz)*.
+   - Pulsa **Deploy**. En ~30 s tendrás un enlace tipo
+     `https://ana-airbnb.vercel.app` que abres en el celular y compartes.
 
-## Despliegue en Vercel
+3. **(Opcional) Nombre y dominio**
+   - En Vercel → *Settings → Domains* puedes cambiar el subdominio o conectar
+     un dominio propio (ej. `frutasconanamaria.com`).
 
-1. Sube estos archivos a un repositorio de GitHub.
-2. En Vercel, crea un nuevo proyecto desde ese repositorio.
-3. Sin build command. La salida pública es la raíz del proyecto.
+4. **Actualizar en el futuro**
+   - Cambia cualquier archivo, haz *Commit* y *Push* en GitHub Desktop.
+   - Vercel redepliega automáticamente. El enlace se mantiene.
 
-## Fuentes de imágenes
+## Cambiar o añadir fotos
 
-- Foto principal de Ana María (hero): suministrada por el usuario.
-- Resto de fotos: experiencia de Ana María en Airbnb (exp. 4054609). Son las fotos
-  originales de la publicación. Al ser una web promocional de la misma experiencia,
-  se usan las imágenes reales del recorrido.
+Las fotos están en `assets/`. Para reemplazar una, sobrescribe el archivo con el
+mismo nombre. La galería, el explorador de sabores y la ruta definen sus imágenes
+en el arreglo correspondiente al inicio de `script.js`.
 
 ## Contacto
 

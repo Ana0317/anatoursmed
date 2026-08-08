@@ -2,26 +2,24 @@
    Ana María · Frutas Exóticas — Interacción
    ============================================================ */
 const WA = "573197333300";
-// Fotos reales de la experiencia de Ana María (Airbnb, exp. 4054609).
-const AIRBNB = "https://a0.muscache.com/im/pictures/Mt/MtTemplate-4054609/original/";
-const img = (id, w = 1000) => `${AIRBNB}${id}.jpeg?im_w=${w}`;
+const A = "./assets/"; // local, optimized photos
 
 /* ---------- Data ---------- */
 // Gallery: real photos from the tour. No repeats.
 const GALLERY = [
-  { id: "8f17681b-769b-4b1d-9c87-a6c0cdb7292b", cap: "Tree tomato, freshly cut open", cls: "tall" },
-  { id: "d6b608f3-4052-4913-92c0-602538d57ab5", cap: "Travelers with Ana María at the market", cls: "wide" },
-  { id: "5e57f20f-935e-4822-8d9d-495bc0edb315", cap: "Fresh fruit, sliced on the spot" },
-  { id: "1cad6461-4d6e-4181-83c8-8f8b987c93d4", cap: "The colors of the market", cls: "tall" },
-  { id: "1b5c9655-32b8-44bc-b729-ddb871631fea", cap: "Inside Plaza Minorista", cls: "wide" },
-  { id: "9bcb4c96-1171-4049-bdb2-da1d4a273d65", cap: "Ana María shares a taste" },
+  { file: "fruit-rambutan.jpg", cap: "Mamoncillo, ripe and ready", cls: "tall" },
+  { file: "market-colorful.jpg", cap: "The colors of the market" },
+  { file: "ana-guest-land.jpg", cap: "Ana María sharing a taste", cls: "wide" },
+  { file: "ana-guest1.jpg", cap: "Discovering a new fruit together" },
+  { file: "fruit-green.jpg", cap: "Fresh from the stall", cls: "tall" },
+  { file: "ana-selfie2.jpg", cap: "Happy travelers with Ana María" },
 ];
 
 const TASTES = {
-  tropical: { fruits: "Passion fruit, granadilla & mango.", desc: "Bright sweetness, gentle acidity, and aromas that fill the whole walk." },
-  citrico: { fruits: "Lulo, mandarin & tree tomato.", desc: "Tart, sparkling freshness — perfect to wake up your palate." },
-  cremoso: { fruits: "Soursop, mangosteen & sapote.", desc: "Soft, enveloping textures, almost like a natural dessert." },
-  aromatico: { fruits: "Pitaya, feijoa & banana passionfruit.", desc: "Delicate perfumes and floral notes that surprise with every bite." },
+  tropical: { img: "fruit-yellow.jpg", fruits: "Passion fruit, granadilla & mango.", desc: "Bright sweetness, gentle acidity, and aromas that fill the whole walk." },
+  citrico: { img: "fruit-tomato.jpg", fruits: "Lulo, mandarin & tree tomato.", desc: "Tart, sparkling freshness — perfect to wake up your palate." },
+  cremoso: { img: "fruit-guama.jpg", fruits: "Soursop, mangosteen & sapote.", desc: "Soft, enveloping textures, almost like a natural dessert." },
+  aromatico: { img: "fruit-mamey.jpg", fruits: "Pitaya, feijoa & banana passionfruit.", desc: "Delicate perfumes and floral notes that surprise with every bite." },
 };
 
 const REVIEWS = [
@@ -34,10 +32,10 @@ const REVIEWS = [
 ];
 
 const STEPS = [
-  "Meeting point at the main entrance of Plaza Minorista. Ana María greets the group, shares the story of the place, and sets the pace for the tour.",
-  "You walk among the fruit stalls. Ana María chats with the vendors and picks the freshest, most unusual fruits of the day.",
-  "Live tasting: Ana María opens each fruit, explains how to eat it, and you share sweet, tart, and creamy flavors that surprise you.",
-  "Wrap-up with culinary tips: ideas for juices, snacks, and desserts, plus recommendations to keep exploring Colombian fruit.",
+  { img: "market-corridor.jpg", text: "Meeting point at the main entrance of Plaza Minorista. Ana María greets the group, shares the story of the place, and sets the pace for the tour." },
+  { img: "market-pyramid.jpg", text: "You walk among the fruit stalls. Ana María chats with the vendors and picks the freshest, most unusual fruits of the day." },
+  { img: "ana-tasting.jpg", text: "Live tasting: Ana María opens each fruit, explains how to eat it, and you share sweet, tart, and creamy flavors that surprise you." },
+  { img: "guest-tasting.jpg", text: "Wrap-up with culinary tips: ideas for juices, snacks, and desserts, plus recommendations to keep exploring Colombian fruit." },
 ];
 
 /* ---------- Utilidades ---------- */
@@ -128,7 +126,7 @@ GALLERY.forEach((item, i) => {
   fig.dataset.caption = item.cap;
   fig.dataset.index = i;
   const image = document.createElement("img");
-  image.src = img(item.id, 720);
+  image.src = A + item.file;
   image.alt = item.cap;
   image.loading = "lazy";
   handleBrokenImg(image);
@@ -144,7 +142,7 @@ let lbIndex = 0;
 
 const renderLb = () => {
   const item = GALLERY[lbIndex];
-  lbImg.src = img(item.id, 1440);
+  lbImg.src = A + item.file;
   lbImg.alt = item.cap;
   lbCap.textContent = item.cap;
 };
@@ -177,10 +175,11 @@ document.addEventListener("keydown", (e) => {
 
 /* ---------- Explora sabores ---------- */
 const tasteResult = $("[data-taste-result]");
+const tasteImage = $("[data-taste-image]");
 const renderTaste = (key) => {
   const t = TASTES[key];
   tasteResult.innerHTML = `<div class="taste-fruits">${t.fruits}</div><div class="taste-desc">${t.desc}</div>`;
-  // reinicia animación
+  if (tasteImage) { tasteImage.src = A + t.img; tasteImage.style.animation = "none"; void tasteImage.offsetWidth; tasteImage.style.animation = ""; }
   tasteResult.style.animation = "none";
   void tasteResult.offsetWidth;
   tasteResult.style.animation = "";
@@ -200,8 +199,10 @@ renderTaste("tropical");
 
 /* ---------- Timeline ---------- */
 const stepDetail = $("[data-step-detail]");
+const stepImage = $("[data-step-image]");
 const renderStep = (i) => {
-  stepDetail.textContent = STEPS[i];
+  stepDetail.textContent = STEPS[i].text;
+  if (stepImage) { stepImage.src = A + STEPS[i].img; stepImage.style.animation = "none"; void stepImage.offsetWidth; stepImage.style.animation = ""; }
   stepDetail.style.animation = "none";
   void stepDetail.offsetWidth;
   stepDetail.style.animation = "";

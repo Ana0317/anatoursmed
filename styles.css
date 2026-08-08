@@ -289,23 +289,57 @@ a { color: inherit; text-decoration: none; }
   background: var(--surface);
   border: 1px solid var(--line);
   border-radius: var(--radius);
-  padding: 1.8rem 1.5rem;
+  overflow: hidden;
   transition: transform 0.35s var(--ease), box-shadow 0.35s, border-color 0.35s;
-  position: relative; overflow: hidden;
-}
-.feature-card::before {
-  content: ""; position: absolute; inset: 0 0 auto 0; height: 3px;
-  background: linear-gradient(90deg, var(--clay), var(--gold));
-  transform: scaleX(0); transform-origin: left; transition: transform 0.4s var(--ease);
+  display: flex; flex-direction: column;
 }
 .feature-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-md); border-color: transparent; }
-.feature-card:hover::before { transform: scaleX(1); }
+.feature-photo { position: relative; aspect-ratio: 4/3; overflow: hidden; background: var(--clay-tint); }
+.feature-photo img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.6s var(--ease); }
+.feature-card:hover .feature-photo img { transform: scale(1.07); }
 .feature-num {
-  font-family: "Fraunces", serif; font-size: 1.5rem; font-weight: 700;
-  color: var(--clay); display: inline-block; margin-bottom: 0.7rem;
+  position: absolute; top: 10px; left: 10px;
+  font-family: "Fraunces", serif; font-size: 1rem; font-weight: 700; color: #fff;
+  width: 36px; height: 36px; border-radius: 10px; display: grid; place-items: center;
+  background: linear-gradient(135deg, var(--clay), var(--clay-deep)); box-shadow: var(--shadow-sm);
 }
-.feature-card h3 { margin-bottom: 0.5rem; }
-.feature-card p { color: var(--ink-soft); font-size: 0.95rem; }
+.feature-body { padding: 1.3rem 1.4rem 1.6rem; }
+.feature-body h3 { margin-bottom: 0.5rem; }
+.feature-body p { color: var(--ink-soft); font-size: 0.95rem; }
+
+/* Flavor explorer with photo */
+.taste-wrap { display: grid; grid-template-columns: 0.85fr 1.15fr; gap: 1.4rem; align-items: stretch; }
+.taste-photo { margin: 0; border-radius: var(--radius); overflow: hidden; box-shadow: var(--shadow-md); background: var(--clay-tint); min-height: 260px; }
+.taste-photo img { width: 100%; height: 100%; object-fit: cover; animation: fadeUp 0.5s var(--ease); }
+
+/* Timeline with photo */
+.timeline-panel { display: grid; grid-template-columns: 1fr 1fr; gap: 1.2rem; align-items: stretch; }
+.timeline-photo { margin: 0; border-radius: var(--radius-sm); overflow: hidden; box-shadow: var(--shadow-sm); background: var(--clay-tint); min-height: 220px; }
+.timeline-photo img { width: 100%; height: 100%; object-fit: cover; animation: fadeUp 0.5s var(--ease); }
+
+/* Reviews banner */
+.reviews-banner {
+  position: relative; border-radius: var(--radius); overflow: hidden;
+  margin-bottom: 2rem; box-shadow: var(--shadow-md); min-height: 240px;
+  display: flex; align-items: flex-end;
+}
+.reviews-banner img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; object-position: center 35%; }
+.reviews-banner-copy {
+  position: relative; z-index: 1; padding: 2rem clamp(1.2rem, 4vw, 2.4rem);
+  background: linear-gradient(to top, rgba(40,26,18,0.86), rgba(40,26,18,0.15) 70%, transparent);
+  width: 100%;
+}
+.reviews-banner-copy h2 { color: #fff; max-width: 620px; }
+.eyebrow.light { color: var(--gold); }
+
+/* Contact photo */
+.contact-card { grid-template-columns: 0.8fr 1.2fr; padding: 0; overflow: hidden; align-items: stretch; }
+.contact-photo { position: relative; min-height: 320px; background: var(--clay-tint); }
+.contact-photo img { position: absolute; inset: 0; width: 100%; height: 100%; object-fit: cover; }
+.contact-inner {
+  display: grid; grid-template-columns: 1fr 1fr; gap: clamp(1.2rem, 3vw, 2.4rem);
+  padding: clamp(1.6rem, 4vw, 2.8rem); align-items: center;
+}
 
 /* ---------- Anfitriona ---------- */
 .host-section {
@@ -545,6 +579,11 @@ a { color: inherit; text-decoration: none; }
   .reviews-grid { columns: 2; }
   .gallery-grid { grid-template-columns: repeat(3, 1fr); }
   .contact-card { grid-template-columns: 1fr; }
+  .contact-inner { grid-template-columns: 1fr; }
+  .contact-photo { min-height: 260px; }
+  .taste-wrap { grid-template-columns: 1fr; }
+  .taste-photo { min-height: 240px; }
+  .timeline-panel { grid-template-columns: 1fr; }
   .timeline-tabs { grid-template-columns: repeat(2, 1fr); }
 }
 
