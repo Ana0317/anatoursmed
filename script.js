@@ -2,7 +2,7 @@
    Ana María · Frutas Exóticas — Interacción
    ============================================================ */
 const WA = "573197333300";
-const A = "./assets/"; // local, optimized photos
+const A = "./"; // photos live next to index.html (flat structure)
 
 /* ---------- Data ---------- */
 // Gallery: real photos from the tour. No repeats.

@@ -11,7 +11,7 @@ Diseño terracota + arena, interactivo y responsivo. Contacto por WhatsApp al
 - `styles.css` — sistema visual (responsive, animaciones).
 - `script.js` — galería con lightbox, contadores, explorador de sabores con foto,
   ruta interactiva con foto, filtros de reseñas, menú móvil y formulario de WhatsApp.
-- `assets/` — 22 fotos reales optimizadas (JPG, ~5 MB en total). Cada sección tiene fotos.
+- 22 fotos `.jpg` reales optimizadas (en la misma carpeta que `index.html`, ~5 MB). Cada sección tiene fotos.
 - `vercel.json` — configuración mínima (URLs limpias).
 - `.gitignore` — excluye archivos de trabajo pesados.
 
@@ -44,9 +44,9 @@ Diseño terracota + arena, interactivo y responsivo. Contacto por WhatsApp al
 
 ## Cambiar o añadir fotos
 
-Las fotos están en `assets/`. Para reemplazar una, sobrescribe el archivo con el
-mismo nombre. La galería, el explorador de sabores y la ruta definen sus imágenes
-en el arreglo correspondiente al inicio de `script.js`.
+Las fotos `.jpg` están junto a `index.html`. Para reemplazar una, sobrescribe el
+archivo con el mismo nombre. La galería, el explorador de sabores y la ruta definen
+sus imágenes en el arreglo correspondiente al inicio de `script.js`.
 
 ## Contacto
 
