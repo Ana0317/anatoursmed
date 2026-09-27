@@ -8,7 +8,7 @@
 */
 window.BOOKING = {
   // Paste your Google Apps Script Web App URL here (keep the quotes):
-  GAS_URL: "",
+  GAS_URL: "https://script.google.com/macros/s/AKfycbzJsdOqKZv0q_IUS-jkgQGufgxvpZG5g1MRNBRQb2IJ774uj0225Agiimc7atZMRbscNw/exec",
 
   CAPACITY: 7,          // max people per time slot
   PRICE_USD: 40,
