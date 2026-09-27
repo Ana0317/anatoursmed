@@ -1,0 +1,348 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Ana María · Medellín Tours — Interactive Magazine</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root{
+        --sand:#f6efe4; --sand-2:#efe5d6; --cream:#fdfaf4; --surface:#fffdf9;
+        --clay:#c06a4b; --clay-deep:#a5543a; --clay-soft:#d98d6f; --clay-tint:#f3ddd0;
+        --gold:#d6a15e; --ink:#3b2a22; --ink-soft:#6d5a4f; --ink-faint:#9a8a7e;
+        --line:#e7dbcb; --wa:#25d366; --s:0.6;
+      }
+      *{box-sizing:border-box;}
+      html,body{margin:0;padding:0;height:100%;}
+      body{font-family:"Inter",system-ui,sans-serif;color:var(--ink);
+        background:radial-gradient(circle at 50% 0%, #4a3529, #2c2019 70%);
+        min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;overflow:hidden;}
+      h1,h2,h3{font-family:"Fraunces",Georgia,serif;margin:0;line-height:1.02;letter-spacing:-0.02em;}
+      p{margin:0;} img{display:block;max-width:100%;}
+
+      /* ---- page design (A4 @96dpi = 794x1123) ---- */
+      .page{width:794px;height:1123px;background:var(--sand);position:relative;overflow:hidden;}
+      .wa-ico{width:1em;height:1em;display:inline-block;background:currentColor;vertical-align:-.12em;-webkit-mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-1.6-.8-2.7-1.5-3.7-3.3-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5 0-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.4 4.7 2 .8 2.7.9 3.7.8.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15l-1.4 5 5.2-1.3A10 10 0 1 0 12 2z'/%3E%3C/svg%3E") center/contain no-repeat;mask:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Cpath d='M17.5 14.4c-.3-.2-1.7-.9-2-1-.3-.1-.5-.2-.7.1-.2.3-.7 1-.9 1.2-.2.2-.3.2-.6.1-1.6-.8-2.7-1.5-3.7-3.3-.3-.5.3-.5.8-1.5.1-.2 0-.4 0-.5 0-.1-.7-1.7-1-2.3-.2-.6-.5-.5-.7-.5h-.6c-.2 0-.5.1-.8.4-.3.3-1 1-1 2.5s1.1 2.9 1.2 3.1c.2.2 2.2 3.4 5.4 4.7 2 .8 2.7.9 3.7.8.6-.1 1.7-.7 2-1.4.2-.7.2-1.2.2-1.4-.1-.1-.3-.2-.6-.3zM12 2a10 10 0 0 0-8.6 15l-1.4 5 5.2-1.3A10 10 0 1 0 12 2z'/%3E%3C/svg%3E") center/contain no-repeat;}
+      .pill{display:inline-flex;align-items:center;gap:.4rem;font-size:.66rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:.34rem .7rem;border-radius:999px;}
+      .pill.time{background:var(--ink);color:var(--cream);}
+      .pill.tag{background:var(--clay-tint);color:var(--clay-deep);}
+      .wa-num{display:inline-flex;align-items:center;gap:.5rem;background:var(--wa);color:#fff;font-weight:700;padding:.6rem 1.05rem;border-radius:999px;font-size:1rem;white-space:nowrap;}
+
+      .cover{display:grid;grid-template-rows:auto auto auto 1fr auto;height:1123px;padding:53px 57px 45px;}
+      .cover-top{display:flex;justify-content:space-between;align-items:flex-start;}
+      .brand{display:flex;align-items:center;gap:10px;}
+      .mark{width:46px;height:46px;border-radius:13px;display:grid;place-items:center;color:#fff;font-family:"Fraunces",serif;font-weight:700;font-size:1.1rem;background:linear-gradient(135deg,var(--clay),var(--gold));}
+      .brand-name{font-family:"Fraunces",serif;font-weight:600;font-size:1.2rem;line-height:1;}
+      .brand-sub{font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:var(--clay-deep);margin-top:2px;}
+      .side-tag{font-size:.66rem;letter-spacing:.32em;text-transform:uppercase;color:var(--ink-faint);}
+      .cover-kicker{margin-top:34px;display:flex;align-items:center;gap:.6rem;font-size:.72rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--clay-deep);}
+      .cover-kicker::before{content:"";width:26px;height:2px;background:var(--clay);}
+      .cover h1{font-size:4.2rem;font-weight:900;margin-top:19px;}
+      .cover h1 em{color:var(--clay);font-style:italic;font-weight:500;}
+      .cover-hero{position:relative;margin-top:26px;}
+      .cover-portrait{width:363px;height:446px;border-radius:20px;overflow:hidden;border:7px solid var(--surface);box-shadow:0 24px 55px rgba(80,50,32,.24);}
+      .cover-portrait img{width:100%;height:100%;object-fit:cover;object-position:center 18%;}
+      .cover-mini{position:absolute;border:6px solid #fff;border-radius:14px;overflow:hidden;box-shadow:0 14px 34px rgba(80,50,32,.22);}
+      .cover-mini img{width:100%;height:100%;object-fit:cover;}
+      .m1{width:197px;height:151px;top:23px;right:8px;transform:rotate(3deg);}
+      .m2{width:181px;height:144px;top:197px;right:-15px;transform:rotate(-3deg);}
+      .m3{width:189px;height:144px;top:363px;right:23px;transform:rotate(2.5deg);}
+      .cover-lead{margin:26px 0 0;max-width:348px;color:var(--ink-soft);font-size:1rem;line-height:1.5;}
+      .cover-rating{display:flex;gap:.6rem;margin-top:30px;flex-wrap:wrap;}
+      .rchip{background:var(--surface);border:1px solid var(--line);border-radius:999px;padding:.5rem .9rem;font-size:.8rem;}
+      .rchip b{font-family:"Fraunces",serif;}
+      .cover-foot{margin-top:34px;display:flex;align-items:center;justify-content:space-between;gap:12px;background:linear-gradient(135deg,var(--clay),var(--clay-deep));color:#fff;border-radius:18px;padding:23px 30px;}
+      .cover-foot .lbl{font-family:"Fraunces",serif;font-size:1.25rem;}
+      .cover-foot .sub{font-size:.78rem;opacity:.85;margin-top:2px;}
+      .cover-foot .wa-num{background:#fff;color:var(--clay-deep);}
+
+      .tp{padding:49px 57px 38px;display:flex;flex-direction:column;height:1123px;}
+      .tp-head{display:flex;align-items:flex-end;justify-content:space-between;border-bottom:2px solid var(--line);padding-bottom:19px;margin-bottom:26px;}
+      .tp-head h2{font-size:1.9rem;}
+      .tp-head .k{font-size:.7rem;letter-spacing:.2em;text-transform:uppercase;color:var(--clay-deep);font-weight:700;}
+      .tp-head .pg{font-family:"Fraunces",serif;color:var(--ink-faint);font-size:.9rem;}
+      .band{display:grid;grid-template-columns:1fr 1fr;gap:34px;align-items:center;flex:1;}
+      .band + .band{border-top:1px dashed var(--line);padding-top:26px;margin-top:26px;}
+      .band.rev .media{order:2;}
+      .collage{display:grid;grid-template-columns:2fr 1fr;grid-template-rows:1fr 1fr;gap:5px;height:333px;position:relative;}
+      .collage .c-big{grid-row:1/3;border-radius:16px;overflow:hidden;box-shadow:0 14px 34px rgba(80,50,32,.16);}
+      .collage .c-sm{border-radius:12px;overflow:hidden;box-shadow:0 10px 24px rgba(80,50,32,.14);}
+      .collage img{width:100%;height:100%;object-fit:cover;}
+      .idx{position:absolute;left:-15px;top:-34px;font-family:"Fraunces",serif;font-weight:900;font-size:3.4rem;color:#fff;background:var(--clay);width:76px;height:76px;border-radius:50%;display:grid;place-items:center;box-shadow:0 12px 26px rgba(165,84,58,.4);z-index:2;}
+      .band.rev .idx{left:auto;right:-15px;}
+      .b-kicker{display:flex;gap:.5rem;align-items:center;margin-bottom:11px;flex-wrap:wrap;}
+      .band h3{font-size:1.8rem;margin-bottom:11px;}
+      .band .desc{color:var(--ink-soft);font-size:.92rem;line-height:1.55;margin-bottom:15px;}
+      .chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:15px;}
+      .chip{font-size:.7rem;font-weight:600;color:var(--clay-deep);background:var(--clay-tint);border-radius:999px;padding:.3rem .65rem;}
+      .b-meta{font-size:.82rem;color:var(--ink-faint);margin-bottom:11px;}
+      .b-meta b{color:var(--ink);}
+      .b-extra{font-size:.82rem;color:var(--ink-soft);line-height:1.5;margin-bottom:13px;}
+      .b-extra b{color:var(--clay-deep);font-weight:600;}
+      .b-cta{display:inline-flex;align-items:center;gap:.45rem;font-weight:700;color:var(--clay-deep);font-size:.9rem;}
+      .book-cta{margin-top:26px;background:var(--ink);color:var(--cream);border-radius:18px;padding:23px 30px;display:flex;align-items:center;justify-content:space-between;gap:14px;}
+      .book-cta h3{color:#fff;font-size:1.5rem;}
+      .book-cta p{color:rgba(253,250,244,.82);font-size:.85rem;margin-top:.3rem;}
+      .foot-note{margin-top:19px;text-align:center;font-size:.72rem;color:var(--ink-faint);}
+
+      .about{display:grid;grid-template-columns:.92fr 1.08fr;gap:38px;align-items:center;flex:1;}
+      .about-photo{position:relative;height:598px;border-radius:20px;overflow:hidden;box-shadow:0 20px 48px rgba(80,50,32,.20);border:6px solid var(--surface);}
+      .about-photo img{width:100%;height:100%;object-fit:cover;object-position:center 25%;}
+      .about-badge{position:absolute;left:23px;bottom:23px;background:var(--surface);border-radius:14px;padding:.6rem .9rem;box-shadow:0 10px 24px rgba(80,50,32,.18);font-size:.8rem;}
+      .about-badge b{font-family:"Fraunces",serif;display:block;font-size:.95rem;}
+      .about-lead{font-family:"Fraunces",serif;font-style:italic;font-size:1.6rem;line-height:1.28;color:var(--ink);margin-bottom:19px;}
+      .about-lead .accent{color:var(--clay);}
+      .about-body{color:var(--ink-soft);font-size:.96rem;line-height:1.6;margin-bottom:23px;}
+      .why{display:grid;grid-template-columns:1fr 1fr;gap:19px;margin-bottom:23px;}
+      .why-item{background:var(--surface);border:1px solid var(--line);border-radius:14px;padding:15px 17px;}
+      .why-item .wt{font-family:"Fraunces",serif;font-size:1rem;margin-bottom:4px;}
+      .why-item .wd{font-size:.8rem;color:var(--ink-soft);line-height:1.45;}
+      .about-cta{display:flex;align-items:center;gap:.6rem;font-size:.9rem;color:var(--ink-soft);}
+
+      /* ---- flipbook ---- */
+      .scene{perspective:2600px;}
+      .book{position:relative;transform-style:preserve-3d;}
+      .leaf{position:absolute;top:0;left:0;transform-origin:left center;transform-style:preserve-3d;
+        transition:transform .8s cubic-bezier(.4,.15,.2,1);border-radius:4px;overflow:hidden;
+        box-shadow:0 20px 60px rgba(0,0,0,.45);backface-visibility:hidden;background:var(--sand);}
+      .leaf .scale{width:794px;height:1123px;transform:scale(var(--s));transform-origin:top left;}
+      .leaf::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;
+        background:linear-gradient(90deg, rgba(0,0,0,.28), rgba(0,0,0,0) 30%);transition:opacity .8s;}
+      .leaf.turning::after{opacity:1;}
+
+      .controls{position:fixed;bottom:20px;left:50%;transform:translateX(-50%);
+        display:flex;align-items:center;gap:14px;background:rgba(28,20,18,.7);backdrop-filter:blur(8px);
+        padding:8px 10px;border-radius:999px;z-index:50;box-shadow:0 8px 24px rgba(0,0,0,.4);}
+      .controls button{width:42px;height:42px;border-radius:50%;border:none;cursor:pointer;
+        background:var(--clay);color:#fff;font-size:1.1rem;display:grid;place-items:center;transition:.2s;}
+      .controls button:hover:not(:disabled){background:var(--clay-deep);transform:scale(1.06);}
+      .controls button:disabled{opacity:.35;cursor:default;}
+      .counter{color:var(--cream);font-size:.9rem;min-width:64px;text-align:center;font-variant-numeric:tabular-nums;letter-spacing:.05em;}
+      .hint{position:fixed;top:16px;left:50%;transform:translateX(-50%);color:rgba(253,250,244,.75);
+        font-size:.8rem;letter-spacing:.04em;z-index:50;background:rgba(28,20,18,.5);padding:6px 14px;border-radius:999px;
+        transition:opacity .5s;}
+      .zone{position:absolute;top:0;height:100%;width:38%;z-index:6;cursor:pointer;}
+      .zone.left{left:0;} .zone.right{right:0;width:62%;}
+      @media (max-width:520px){ .hint{font-size:.72rem;} }
+    </style>
+  </head>
+  <body>
+    <div class="hint" data-hint>Tap the right side, use ← → keys, or swipe to turn the page</div>
+    <div class="scene">
+      <div class="book" data-book></div>
+    </div>
+    <div class="controls">
+      <button data-prev aria-label="Previous page">‹</button>
+      <span class="counter" data-counter>1 / 4</span>
+      <button data-next aria-label="Next page">›</button>
+    </div>
+
+    <!-- ===== PAGE TEMPLATES ===== -->
+    <template data-pages>
+      <!-- COVER -->
+      <section class="page cover">
+        <div class="cover-top">
+          <div class="brand"><span class="mark">AM</span><span><div class="brand-name">Ana María</div><div class="brand-sub">Medellín · Local Tours</div></span></div>
+          <div class="side-tag">Medellín — Colombia · 2026</div>
+        </div>
+        <div class="cover-kicker">Guided experiences · 2 hours each</div>
+        <h1>Discover<br />Medellín with<br /><em>Ana María</em>.</h1>
+        <div class="cover-hero">
+          <div class="cover-portrait"><img src="./cover-ana.jpg" alt="Ana María with a traveler tasting exotic fruit at Plaza Minorista" /></div>
+          <div class="cover-mini m1"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Medell%C3%ADn%2C%20Plaza%20Botero%2C%202023-07%20CN-01.jpg?width=800" alt="Plaza Botero" /></div>
+          <div class="cover-mini m2"><img src="./fruit-granadilla.jpg" alt="Exotic fruit" /></div>
+          <div class="cover-mini m3"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/L%C3%ADnea%20K%20(Medell%C3%ADn%20Metrocable)%2001.jpg?width=800" alt="Medellín Metrocable" /></div>
+          <p class="cover-lead">Exotic fruit, street art, heritage, and the city's iconic transport — warm, local tours led by someone who loves sharing her city.</p>
+        </div>
+        <div class="cover-rating">
+          <span class="rchip"><b>5.0</b> ★ rating</span>
+          <span class="rchip"><b>27</b> reviews</span>
+          <span class="rchip">English &amp; Spanish</span>
+          <span class="rchip"><b>$30</b> USD / person</span>
+          <span class="rchip">Max <b>7</b> / group</span>
+        </div>
+        <div class="cover-foot">
+          <div><div class="lbl">Book directly with Ana María</div><div class="sub">Ask about dates, prices &amp; group availability</div></div>
+          <span class="wa-num"><span class="wa-ico"></span> +57 319 7333300</span>
+        </div>
+      </section>
+
+      <!-- ABOUT -->
+      <section class="page">
+        <div class="tp">
+          <div class="tp-head"><div><div class="k">Your host</div><h2>Meet Ana María.</h2></div><div class="pg">Medellín · since 2018</div></div>
+          <div class="about">
+            <div class="about-photo">
+              <img src="./host-anamaria.jpg" alt="Ana María with a traveler during a tour" />
+              <div class="about-badge"><b>Ana María</b>Your local host · ES / EN</div>
+            </div>
+            <div class="about-text">
+              <p class="about-lead">"Colombia has a huge variety of fruits and stories that are little known abroad — and <span class="accent">I love sharing them</span>."</p>
+              <p class="about-body">Ana María is a student and entrepreneur from Medellín who has been <b>offering guided tours since 2018</b>, sharing Colombia's lesser-known fruits, flavors, and stories. A fruit-snack maker at heart, she keeps every experience small — <b>a maximum of 7 people per group</b> — for an easygoing pace and real conversations with the locals who make Medellín special. Larger groups are welcome too — they simply book several slots across different times or days, so everyone still enjoys the same close, personal experience.</p>
+              <div class="why">
+                <div class="why-item"><div class="wt">Local &amp; personal</div><div class="wd">Real places and people, not a scripted tour.</div></div>
+                <div class="why-item"><div class="wt">Up to 7 people</div><div class="wd">Small groups by design; larger groups can book several slots across different times or days.</div></div>
+                <div class="why-item"><div class="wt">English &amp; Spanish</div><div class="wd">Comfortable for international travelers.</div></div>
+                <div class="why-item"><div class="wt">5.0 ★ · 27 reviews</div><div class="wd">Travelers consistently rate her experiences top marks.</div></div>
+              </div>
+              <div class="about-cta"><span class="wa-ico"></span> Message Ana María on WhatsApp · +57 319 7333300</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOURS 1-2 -->
+      <section class="page">
+        <div class="tp">
+          <div class="tp-head"><div><div class="k">The experiences</div><h2>Four ways to feel Medellín.</h2></div><div class="pg">01 — 02</div></div>
+          <div class="band">
+            <div class="media"><div class="collage"><div class="idx">1</div>
+              <div class="c-big"><img src="./ana-tasting.jpg" alt="Exotic fruit tasting with Ana María" /></div>
+              <div class="c-sm"><img src="./market-stall.jpg" alt="Fruit stall at Plaza Minorista" /></div>
+              <div class="c-sm"><img src="./fruit-rambutan.jpg" alt="Exotic Colombian fruit" /></div>
+            </div></div>
+            <div class="text">
+              <div class="b-kicker"><span class="pill time">⏱ 2 hours</span><span class="pill tag">Signature</span></div>
+              <h3>Exotic Fruit Tasting</h3>
+              <p class="desc">Taste Colombian fruits almost no one knows at the lively Plaza Minorista — meet the vendors, learn how each one grows, and try flavors from sweet and creamy to bright and tart, all guided by Ana María.</p>
+              <p class="b-extra"><b>You'll try:</b> 20+ exotic fruits, fresh-cut and in juices, plus tips to pick and prepare them back home.</p>
+              <div class="chips"><span class="chip">20+ fruits</span><span class="chip">Snacks included</span><span class="chip">Up to 7 people</span></div>
+              <p class="b-meta"><b>2 hours</b> · <b>$30 USD</b> per person · Plaza Minorista</p>
+              <span class="b-cta"><span class="wa-ico"></span> Book on WhatsApp</span>
+            </div>
+          </div>
+          <div class="band rev">
+            <div class="media"><div class="collage"><div class="idx">2</div>
+              <div class="c-big"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Interior%20Claustro%20San%20Ignacio%20(4).jpg?width=1100" alt="Interior courtyard of Claustro San Ignacio" /></div>
+              <div class="c-sm"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Interior%20Claustro%20San%20Ignacio%20(2).jpg?width=800" alt="Inside the Claustro" /></div>
+              <div class="c-sm"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Interior%20Claustro%20San%20Ignacio%20(3).jpg?width=800" alt="Corridors of the Claustro" /></div>
+            </div></div>
+            <div class="text">
+              <div class="b-kicker"><span class="pill time">⏱ 2 hours</span><span class="pill tag">Heritage</span></div>
+              <h3>Claustro Comfama Visit</h3>
+              <p class="desc">Step inside a 200-year-old heritage building in the heart of downtown — once a convent, school, barracks, and jail, now a beautifully restored cultural landmark run by Comfama.</p>
+              <p class="b-extra"><b>Inside:</b> restored courtyards and corridors, the old chapel, a mural hidden under seven layers of paint, and remains of Medellín's oldest aqueduct.</p>
+              <div class="chips"><span class="chip">200+ years</span><span class="chip">Restored courtyards</span><span class="chip">Hidden mural</span></div>
+              <p class="b-meta"><b>2 hours</b> · <b>$30 USD</b> per person · downtown</p>
+              <span class="b-cta"><span class="wa-ico"></span> Book on WhatsApp</span>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- TOURS 3-4 -->
+      <section class="page">
+        <div class="tp">
+          <div class="tp-head"><div><div class="k">The experiences</div><h2>The city that moves &amp; its heart.</h2></div><div class="pg">03 — 04</div></div>
+          <div class="band">
+            <div class="media"><div class="collage"><div class="idx">3</div>
+              <div class="c-big"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Panor%C3%A1mica%20de%20Medell%C3%ADn%20desde%20metrocable.jpg?width=1100" alt="Panoramic view of Medellín from the Metrocable" /></div>
+              <div class="c-sm"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/L%C3%ADnea%20K%20(Medell%C3%ADn%20Metrocable)%2001.jpg?width=800" alt="Medellín Metrocable cabins" /></div>
+              <div class="c-sm"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/2019%20Medell%C3%ADn%20-%20Tranv%C3%ADa%20en%20la%20estaci%C3%B3n%20Bicentenario.jpg?width=800" alt="Ayacucho tram" /></div>
+            </div></div>
+            <div class="text">
+              <div class="b-kicker"><span class="pill time">⏱ 2 hours</span><span class="pill tag">City &amp; views</span></div>
+              <h3>Metro, Tram &amp; Cable Tour</h3>
+              <p class="desc">Ride the transport that transformed Medellín — the Metro, the Ayacucho tram, and the cable cars that climb the hills — with the story of how mobility reconnected the city.</p>
+              <p class="b-extra"><b>Highlight:</b> sweeping panoramic views over the city from the Metrocable, gliding high above the neighborhoods.</p>
+              <div class="chips"><span class="chip">Metro &amp; tram</span><span class="chip">Cable-car views</span><span class="chip">City panoramas</span></div>
+              <p class="b-meta"><b>2 hours</b> · <b>$30 USD</b> per person · Metro network</p>
+              <span class="b-cta"><span class="wa-ico"></span> Book on WhatsApp</span>
+            </div>
+          </div>
+          <div class="band rev">
+            <div class="media"><div class="collage"><div class="idx">4</div>
+              <div class="c-big"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Medell%C3%ADn%2C%20Plaza%20Botero%2C%202023-07%20CN-01.jpg?width=1100" alt="Plaza Botero, downtown Medellín" /></div>
+              <div class="c-sm"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/2018%20Entrada%20del%20centro%20comercial%20Palacio%20Nacional%20de%20Medell%C3%ADn.jpg?width=800" alt="Palacio Nacional" /></div>
+              <div class="c-sm"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/El%20final%20de%20las%20vacaciones.jpg?width=800" alt="Botero sculpture" /></div>
+            </div></div>
+            <div class="text">
+              <div class="b-kicker"><span class="pill time">⏱ 2 hours</span><span class="pill tag">Downtown</span></div>
+              <h3>Downtown Medellín Tour</h3>
+              <p class="desc">Explore the historic center: Plaza Botero and its giant bronze sculptures, the Museo de Antioquia, and the striking Palacio Nacional — art, history, and architecture in the beating heart of the city.</p>
+              <p class="b-extra"><b>You'll see:</b> 20+ Botero sculptures, the Museo de Antioquia, the Palacio Nacional and the Rafael Uribe Uribe Palace of Culture.</p>
+              <div class="chips"><span class="chip">Museo de Antioquia</span><span class="chip">Palacio Nacional</span><span class="chip">Botero sculptures</span></div>
+              <p class="b-meta"><b>2 hours</b> · <b>$30 USD</b> per person · city center</p>
+              <span class="b-cta"><span class="wa-ico"></span> Book on WhatsApp</span>
+            </div>
+          </div>
+          <div class="book-cta">
+            <div><h3>Ready to explore Medellín?</h3><p>Every tour is 2 hours · $30 USD per person · groups of up to 7 — larger groups can book several slots across other times or days. Message Ana María for dates &amp; languages.</p></div>
+            <span class="wa-num"><span class="wa-ico"></span> +57 319 7333300</span>
+          </div>
+          <p class="foot-note">Ana María · Exotic fruit &amp; local tours in Medellín · WhatsApp +57 319 7333300</p>
+        </div>
+      </section>
+    </template>
+
+    <script>
+      const PW=794, PH=1123;
+      const book=document.querySelector('[data-book]');
+      const tpl=document.querySelector('[data-pages]');
+      const pages=Array.from(tpl.content.querySelectorAll('.page'));
+      const N=pages.length;
+      const leaves=[];
+      pages.forEach((pg,i)=>{
+        const leaf=document.createElement('div');
+        leaf.className='leaf';
+        const scale=document.createElement('div');
+        scale.className='scale';
+        scale.appendChild(pg.cloneNode(true));
+        leaf.appendChild(scale);
+        book.appendChild(leaf);
+        leaves.push(leaf);
+      });
+
+      let cur=0; // pages turned (0 => showing page 1)
+      const counter=document.querySelector('[data-counter]');
+      const prevBtn=document.querySelector('[data-prev]');
+      const nextBtn=document.querySelector('[data-next]');
+      const hint=document.querySelector('[data-hint]');
+
+      function render(){
+        leaves.forEach((lf,i)=>{
+          if(i<cur){ lf.style.transform='rotateY(-180deg)'; lf.style.zIndex=i; }
+          else { lf.style.transform='rotateY(0deg)'; lf.style.zIndex=N-i; }
+        });
+        counter.textContent=(cur+1)+' / '+N;
+        prevBtn.disabled=cur===0;
+        nextBtn.disabled=cur===N-1;
+      }
+      function flipShadow(leaf){
+        leaf.classList.add('turning');
+        setTimeout(()=>leaf.classList.remove('turning'),820);
+      }
+      function next(){ if(cur<N-1){ flipShadow(leaves[cur]); cur++; render(); hideHint(); } }
+      function prev(){ if(cur>0){ cur--; flipShadow(leaves[cur]); render(); hideHint(); } }
+      function hideHint(){ if(hint){ hint.style.opacity='0'; } }
+
+      nextBtn.addEventListener('click',next);
+      prevBtn.addEventListener('click',prev);
+      document.addEventListener('keydown',e=>{ if(e.key==='ArrowRight')next(); if(e.key==='ArrowLeft')prev(); });
+
+      // click zones over the book
+      const zoneL=document.createElement('div'); zoneL.className='zone left';
+      const zoneR=document.createElement('div'); zoneR.className='zone right';
+      zoneL.addEventListener('click',prev); zoneR.addEventListener('click',next);
+      book.appendChild(zoneL); book.appendChild(zoneR);
+
+      // swipe
+      let sx=null;
+      book.addEventListener('touchstart',e=>{sx=e.touches[0].clientX;},{passive:true});
+      book.addEventListener('touchend',e=>{ if(sx===null)return; const dx=e.changedTouches[0].clientX-sx; if(dx<-40)next(); else if(dx>40)prev(); sx=null; });
+
+      function fit(){
+        const s=Math.min((window.innerHeight*0.88)/PH,(window.innerWidth*0.94)/PW);
+        document.documentElement.style.setProperty('--s',s);
+        const w=PW*s, h=PH*s;
+        book.style.width=w+'px'; book.style.height=h+'px';
+        leaves.forEach(lf=>{ lf.style.width=w+'px'; lf.style.height=h+'px'; });
+      }
+      window.addEventListener('resize',fit);
+      fit(); render();
+      setTimeout(hideHint,6000);
+    </script>
+  </body>
+</html>

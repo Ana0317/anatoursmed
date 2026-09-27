@@ -35,10 +35,11 @@
       </a>
       <nav class="nav-links" aria-label="Main navigation" data-nav>
         <a href="#experiencia">Experience</a>
+        <a href="#tours">Tours</a>
         <a href="#anfitriona">Ana María</a>
         <a href="#galeria">Gallery</a>
         <a href="#resenas">Reviews</a>
-        <a href="#contacto">Contact</a>
+        <a href="#agenda">Book</a>
       </nav>
       <a
         class="nav-cta"
@@ -83,7 +84,7 @@
                 <span class="wa-icon" aria-hidden="true"></span>
                 Book on WhatsApp
               </a>
-              <a class="button ghost" href="#galeria">See the experience</a>
+              <a class="button ghost" href="#agenda">Book a tour</a>
             </div>
             <dl class="hero-stats" aria-label="Experience highlights">
               <div><dt data-count="5.0" data-decimals="1">0</dt><dd>★ rating</dd></div>
@@ -146,6 +147,53 @@
         </div>
       </section>
 
+      <!-- ALL TOURS -->
+      <section class="section tours-all" id="tours">
+        <div class="section-heading reveal">
+          <p class="eyebrow">All experiences</p>
+          <h2>Four ways to discover Medellín.</h2>
+          <p class="section-sub">Every tour lasts about 2 hours · $40 USD per person · hotel pickup included · groups of up to 7 (larger groups can book several slots).</p>
+        </div>
+        <div class="tours-grid reveal">
+          <article class="tour-card">
+            <div class="tc-photo"><img src="./ana-tasting.jpg" alt="Exotic fruit tasting with Ana María" loading="lazy" /><span class="tc-badge">⏱ 2 h</span></div>
+            <div class="tc-body">
+              <h3>Exotic Fruit Tasting</h3>
+              <p>Taste Colombian fruits almost no one knows at the lively Plaza Minorista, with tastings, juices and local stories.</p>
+              <div class="tc-meta"><span>$40 USD</span><span>Up to 7</span><span>Hotel pickup</span></div>
+              <a class="button primary sm" href="#agenda" data-book-tour="fruit">Book this tour</a>
+            </div>
+          </article>
+          <article class="tour-card">
+            <div class="tc-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Interior%20Claustro%20San%20Ignacio%20(4).jpg?width=800" alt="Claustro San Ignacio courtyard" loading="lazy" /><span class="tc-badge">⏱ 2 h</span></div>
+            <div class="tc-body">
+              <h3>Claustro Comfama Visit</h3>
+              <p>A 200-year-old heritage building downtown — courtyards, a hidden mural and Medellín's oldest aqueduct.</p>
+              <div class="tc-meta"><span>$40 USD</span><span>Up to 7</span><span>Hotel pickup</span></div>
+              <a class="button primary sm" href="#agenda" data-book-tour="claustro">Book this tour</a>
+            </div>
+          </article>
+          <article class="tour-card">
+            <div class="tc-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Panor%C3%A1mica%20de%20Medell%C3%ADn%20desde%20metrocable.jpg?width=800" alt="Panoramic view from the Medellín Metrocable" loading="lazy" /><span class="tc-badge">⏱ 2 h</span></div>
+            <div class="tc-body">
+              <h3>Metro, Tram &amp; Cable Tour</h3>
+              <p>Ride the Metro, the Ayacucho tram and the cable cars — with sweeping panoramic views over the city.</p>
+              <div class="tc-meta"><span>$40 USD</span><span>Up to 7</span><span>Hotel pickup</span></div>
+              <a class="button primary sm" href="#agenda" data-book-tour="metro">Book this tour</a>
+            </div>
+          </article>
+          <article class="tour-card">
+            <div class="tc-photo"><img src="https://commons.wikimedia.org/wiki/Special:FilePath/Medell%C3%ADn%2C%20Plaza%20Botero%2C%202023-07%20CN-01.jpg?width=800" alt="Plaza Botero, downtown Medellín" loading="lazy" /><span class="tc-badge">⏱ 2 h</span></div>
+            <div class="tc-body">
+              <h3>Downtown Medellín Tour</h3>
+              <p>Plaza Botero and its bronze sculptures, the Museo de Antioquia and the striking Palacio Nacional.</p>
+              <div class="tc-meta"><span>$40 USD</span><span>Up to 7</span><span>Hotel pickup</span></div>
+              <a class="button primary sm" href="#agenda" data-book-tour="downtown">Book this tour</a>
+            </div>
+          </article>
+        </div>
+      </section>
+
       <!-- HOST -->
       <section class="section host-section" id="anfitriona">
         <div class="host-photo reveal">
@@ -164,7 +212,7 @@
             <li><strong>Entrepreneur</strong> and fruit-snack maker.</li>
             <li>Tours in <strong>English &amp; Spanish</strong>.</li>
             <li>Includes <strong>food to snack on</strong> · beginner-friendly.</li>
-            <li>From <strong>$30 USD</strong> per person · small groups.</li>
+            <li><strong>$40 USD</strong> per person · groups of up to 7.</li>
           </ul>
           <a
             class="button primary"
@@ -262,6 +310,39 @@
         </div>
       </section>
 
+      <!-- BOOKING / AGENDA -->
+      <section class="section agenda-section" id="agenda">
+        <div class="section-heading reveal">
+          <p class="eyebrow">Book online</p>
+          <h2>Reserve your spot.</h2>
+          <p class="section-sub">Pick a tour, date and time. You'll see how many spots are left in that slot (max 7). Larger groups can book several slots.</p>
+        </div>
+        <div class="booking-wrap reveal">
+          <form class="booking-form" data-booking-form novalidate>
+            <div class="demo-banner" data-demo-banner hidden>Demo mode — bookings are saved only on this device for preview. Connect Google Sheets to go live (see BOOKING-SETUP.md).</div>
+            <div class="bf-grid">
+              <label class="bf-full">Tour<select name="tour" required></select></label>
+              <label>Date<input type="date" name="date" required /></label>
+              <label>Time<select name="time" required></select></label>
+              <label>People<input type="number" name="people" min="1" max="7" value="2" required /></label>
+              <label>Full name<input type="text" name="name" autocomplete="name" required /></label>
+              <label>Phone / WhatsApp<input type="tel" name="phone" autocomplete="tel" required /></label>
+              <label class="bf-full">Email (optional)<input type="email" name="email" autocomplete="email" /></label>
+            </div>
+            <label class="bf-check"><input type="checkbox" data-allergy-toggle /> I have allergies or food intolerances</label>
+            <div class="bf-allergy" data-allergy-wrap hidden>
+              <label>Tell Ana María what to avoid<textarea name="allergies" rows="2" placeholder="e.g. nuts, lactose, gluten, shellfish…"></textarea></label>
+            </div>
+            <button class="button primary full" type="submit">Request booking</button>
+            <p class="booking-msg" data-booking-msg hidden></p>
+            <p class="bf-alt">Prefer to chat? <a href="https://wa.me/573197333300" target="_blank" rel="noopener">Book on WhatsApp</a></p>
+          </form>
+          <aside class="availability" data-availability>
+            <p class="av-hint">Pick a date and time to see live availability.</p>
+          </aside>
+        </div>
+      </section>
+
       <!-- CONTACT -->
       <section class="section contact-section" id="contacto">
         <div class="contact-card reveal">
@@ -323,9 +404,11 @@
           Book on WhatsApp
         </a>
       </div>
-      <p class="footer-note">Photos from Ana María's fruit tasting experience in Medellín.</p>
+      <p class="footer-note">Photos from Ana María's fruit tasting experience in Medellín. · <a class="admin-link" href="./admin.html">Ana María — admin</a></p>
     </footer>
 
     <script src="./script.js"></script>
+    <script src="./booking-config.js"></script>
+    <script src="./booking.js"></script>
   </body>
 </html>

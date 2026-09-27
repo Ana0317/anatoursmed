@@ -1,0 +1,211 @@
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="robots" content="noindex, nofollow" />
+    <title>Panel de Ana María — Reservas</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <style>
+      :root{--sand:#f6efe4;--sand-2:#efe5d6;--cream:#fdfaf4;--surface:#fffdf9;--clay:#c06a4b;--clay-deep:#a5543a;--clay-soft:#d98d6f;--clay-tint:#f3ddd0;--gold:#d6a15e;--ink:#3b2a22;--ink-soft:#6d5a4f;--ink-faint:#9a8a7e;--line:#e7dbcb;--wa:#25d366;--warn:#c0392b;}
+      *{box-sizing:border-box;}
+      body{margin:0;font-family:"Inter",system-ui,sans-serif;color:var(--ink);background:var(--sand);}
+      h1,h2,h3{font-family:"Fraunces",Georgia,serif;margin:0;}
+      a{color:var(--clay-deep);}
+      .top{display:flex;align-items:center;gap:.7rem;padding:1rem 1.2rem;background:var(--surface);border-bottom:1px solid var(--line);position:sticky;top:0;z-index:10;}
+      .mark{width:40px;height:40px;border-radius:11px;display:grid;place-items:center;color:#fff;font-family:"Fraunces",serif;font-weight:700;background:linear-gradient(135deg,var(--clay),var(--gold));}
+      .top strong{font-family:"Fraunces",serif;font-size:1.05rem;display:block;}
+      .top small{color:var(--ink-faint);font-size:.75rem;}
+      .top .sp{margin-left:auto;}
+      .btn{display:inline-flex;align-items:center;gap:.4rem;border:none;cursor:pointer;background:var(--clay);color:#fff;font-weight:600;padding:.6rem 1.1rem;border-radius:999px;font-size:.9rem;transition:.2s;}
+      .btn:hover{background:var(--clay-deep);}
+      .btn.ghost{background:transparent;color:var(--ink);border:1px solid var(--line);}
+      .wrap{max-width:1100px;margin:0 auto;padding:1.4rem 1.2rem 3rem;}
+
+      /* login */
+      .login{max-width:360px;margin:8vh auto;background:var(--surface);border:1px solid var(--line);border-radius:20px;padding:2rem;box-shadow:0 20px 50px rgba(80,50,32,.12);text-align:center;}
+      .login .mark{margin:0 auto 1rem;width:52px;height:52px;font-size:1.2rem;}
+      .login h1{font-size:1.4rem;margin-bottom:.3rem;}
+      .login p{color:var(--ink-soft);font-size:.9rem;margin:0 0 1.2rem;}
+      .login input{width:100%;padding:.8rem .9rem;border:1px solid var(--line);border-radius:12px;background:var(--cream);font-size:1rem;margin-bottom:.8rem;}
+      .login .btn{width:100%;justify-content:center;}
+      .login .err{color:var(--warn);font-size:.85rem;margin-top:.7rem;min-height:1em;}
+
+      .demo{background:#fff4e6;border:1px solid var(--gold);color:#8a5a1f;font-size:.85rem;border-radius:12px;padding:.7rem .9rem;margin-bottom:1.2rem;}
+      .stats{display:grid;grid-template-columns:repeat(4,1fr);gap:1rem;margin-bottom:1.6rem;}
+      .stat{background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:1.1rem 1.2rem;}
+      .stat b{font-family:"Fraunces",serif;font-size:1.9rem;display:block;color:var(--ink);}
+      .stat span{color:var(--ink-faint);font-size:.8rem;}
+      .toolbar{display:flex;flex-wrap:wrap;gap:.7rem;align-items:center;margin-bottom:1.2rem;}
+      .toolbar input,.toolbar select{padding:.55rem .8rem;border:1px solid var(--line);border-radius:10px;background:var(--surface);font-size:.9rem;}
+      .toolbar .sp{margin-left:auto;}
+
+      .slot{background:var(--surface);border:1px solid var(--line);border-radius:16px;margin-bottom:1.1rem;overflow:hidden;}
+      .slot-head{display:flex;align-items:center;gap:.8rem;padding:.9rem 1.1rem;background:var(--clay-tint);}
+      .slot-head h3{font-size:1.05rem;}
+      .slot-head .cap{margin-left:auto;font-size:.82rem;font-weight:700;color:var(--clay-deep);background:var(--surface);padding:.3rem .7rem;border-radius:999px;}
+      .slot-head .full{background:var(--warn);color:#fff;}
+      table{width:100%;border-collapse:collapse;font-size:.88rem;}
+      th,td{text-align:left;padding:.6rem .8rem;border-top:1px solid var(--line);vertical-align:top;}
+      th{font-size:.7rem;text-transform:uppercase;letter-spacing:.08em;color:var(--ink-faint);background:var(--cream);}
+      td .who{font-weight:600;}
+      td .contact{color:var(--ink-soft);font-size:.82rem;}
+      .tourtag{display:inline-block;background:var(--clay-tint);color:var(--clay-deep);font-size:.72rem;font-weight:600;padding:.2rem .55rem;border-radius:999px;}
+      .allergy{display:inline-block;background:#fdecea;color:var(--warn);border:1px solid #f0b3ab;font-size:.78rem;font-weight:600;padding:.25rem .55rem;border-radius:8px;margin-top:.25rem;}
+      .allergy::before{content:"⚠ ";}
+      .none{color:var(--ink-faint);}
+      .empty{text-align:center;color:var(--ink-faint);padding:3rem 1rem;}
+      @media(max-width:720px){.stats{grid-template-columns:repeat(2,1fr);}.contact-hide{display:none;}}
+    </style>
+  </head>
+  <body>
+    <!-- LOGIN -->
+    <div id="login" class="login">
+      <div class="mark">AM</div>
+      <h1>Panel de Ana María</h1>
+      <p>Ingresa tu contraseña para ver las reservas.</p>
+      <input id="pass" type="password" placeholder="Contraseña" autocomplete="current-password" />
+      <button class="btn" id="enter">Entrar</button>
+      <div class="err" id="err"></div>
+    </div>
+
+    <!-- DASHBOARD -->
+    <div id="app" hidden>
+      <div class="top">
+        <span class="mark">AM</span>
+        <span><strong>Reservas</strong><small>Panel privado de Ana María</small></span>
+        <span class="sp"></span>
+        <button class="btn ghost" id="refresh">↻ Actualizar</button>
+        <button class="btn ghost" id="logout">Salir</button>
+      </div>
+      <div class="wrap">
+        <div class="demo" id="demo" hidden>Modo demo — mostrando reservas guardadas en este dispositivo. Conecta Google Sheets para ver las reales.</div>
+        <div class="stats">
+          <div class="stat"><b id="s-book">0</b><span>reservas</span></div>
+          <div class="stat"><b id="s-people">0</b><span>personas</span></div>
+          <div class="stat"><b id="s-up">0</b><span>próximas (hoy+)</span></div>
+          <div class="stat"><b id="s-alg">0</b><span>con alergias</span></div>
+        </div>
+        <div class="toolbar">
+          <input type="date" id="f-date" title="Filtrar por fecha" />
+          <select id="f-tour"><option value="">Todos los tours</option></select>
+          <input type="text" id="f-search" placeholder="Buscar nombre o teléfono…" />
+          <button class="btn ghost" id="clear">Limpiar</button>
+        </div>
+        <div id="list"></div>
+      </div>
+    </div>
+
+    <script src="./booking-config.js"></script>
+    <script>
+      const CFG = window.BOOKING || {};
+      const LIVE = !!(CFG.GAS_URL && CFG.GAS_URL.trim());
+      const CAP = CFG.CAPACITY || 7;
+      const LS_KEY = "am_bookings_demo";
+      const $ = (s) => document.querySelector(s);
+      const tourName = (id) => ((CFG.TOURS || []).find((t) => t.id === id) || {}).name || id || "—";
+      let BOOKINGS = [];
+
+      // populate tour filter
+      (CFG.TOURS || []).forEach((t) => { const o = document.createElement("option"); o.value = t.id; o.textContent = t.name; $("#f-tour").appendChild(o); });
+
+      $("#enter").addEventListener("click", login);
+      $("#pass").addEventListener("keydown", (e) => { if (e.key === "Enter") login(); });
+      $("#logout").addEventListener("click", () => { sessionStorage.removeItem("am_key"); location.reload(); });
+      $("#refresh").addEventListener("click", () => load(sessionStorage.getItem("am_key")));
+      ["f-date","f-tour","f-search"].forEach((id) => $("#" + id).addEventListener("input", render));
+      $("#clear").addEventListener("click", () => { $("#f-date").value = ""; $("#f-tour").value = ""; $("#f-search").value = ""; render(); });
+
+      // auto-login if key stored this session
+      const saved = sessionStorage.getItem("am_key");
+      if (saved) load(saved);
+
+      async function login() {
+        const pass = $("#pass").value.trim();
+        if (!pass) return;
+        $("#err").textContent = "Verificando…";
+        const ok = await load(pass);
+        if (ok) sessionStorage.setItem("am_key", pass);
+        else $("#err").textContent = "Contraseña incorrecta.";
+      }
+
+      async function load(key) {
+        try {
+          if (LIVE) {
+            const r = await fetch(CFG.GAS_URL + "?action=admin&key=" + encodeURIComponent(key || ""));
+            const j = await r.json();
+            if (!j.ok) return false;
+            BOOKINGS = j.bookings || [];
+          } else {
+            // demo mode: no server passcode, any entry opens local data
+            BOOKINGS = JSON.parse(localStorage.getItem(LS_KEY) || "[]");
+            $("#demo").hidden = false;
+          }
+          $("#login").hidden = true;
+          $("#app").hidden = false;
+          render();
+          return true;
+        } catch (e) {
+          $("#err").textContent = "No se pudo conectar. Revisa el enlace del script.";
+          return false;
+        }
+      }
+
+      function fmtDate(d) {
+        try { const x = new Date(d + "T00:00:00"); return x.toLocaleDateString("es-CO", { weekday: "long", day: "numeric", month: "long" }); }
+        catch (e) { return d; }
+      }
+      const timeLabel = (v) => ((CFG.TIMES || []).find((t) => t.v === v) || {}).label || v;
+
+      function render() {
+        const fDate = $("#f-date").value, fTour = $("#f-tour").value, fSearch = $("#f-search").value.toLowerCase().trim();
+        const today = new Date().toISOString().slice(0, 10);
+
+        // stats (over all bookings)
+        $("#s-book").textContent = BOOKINGS.length;
+        $("#s-people").textContent = BOOKINGS.reduce((s, b) => s + (Number(b.people) || 0), 0);
+        $("#s-up").textContent = BOOKINGS.filter((b) => String(b.date) >= today).length;
+        $("#s-alg").textContent = BOOKINGS.filter((b) => (b.allergies || "").toString().trim()).length;
+
+        // filter
+        let rows = BOOKINGS.filter((b) => {
+          if (fDate && String(b.date) !== fDate) return false;
+          if (fTour && b.tour !== fTour) return false;
+          if (fSearch) { const hay = ((b.name || "") + " " + (b.phone || "") + " " + (b.email || "")).toLowerCase(); if (!hay.includes(fSearch)) return false; }
+          return true;
+        });
+
+        // group by date+time
+        const groups = {};
+        rows.forEach((b) => { const k = b.date + "|" + b.time; (groups[k] = groups[k] || []).push(b); });
+        const keys = Object.keys(groups).sort();
+
+        const list = $("#list");
+        if (!keys.length) { list.innerHTML = '<div class="empty">No hay reservas' + (fDate || fTour || fSearch ? " con esos filtros" : " todavía") + ".</div>"; return; }
+
+        list.innerHTML = keys.map((k) => {
+          const items = groups[k].slice().sort((a, b) => (a.name || "").localeCompare(b.name || ""));
+          const [date, time] = k.split("|");
+          const taken = items.reduce((s, b) => s + (Number(b.people) || 0), 0);
+          const full = taken >= CAP;
+          const rowsHtml = items.map((b) => {
+            const alg = (b.allergies || "").toString().trim();
+            return "<tr><td><div class='who'>" + esc(b.name || "—") + "</div>" +
+              (alg ? "<div class='allergy'>" + esc(alg) + "</div>" : "") + "</td>" +
+              "<td><span class='tourtag'>" + esc(tourName(b.tour)) + "</span></td>" +
+              "<td>" + (Number(b.people) || 0) + "</td>" +
+              "<td class='contact-hide'><div class='contact'>" + esc(b.phone || "") + (b.email ? "<br>" + esc(b.email) : "") + "</div></td></tr>";
+          }).join("");
+          return "<div class='slot'><div class='slot-head'><h3>" + fmtDate(date) + " · " + timeLabel(time) +
+            "</h3><span class='cap" + (full ? " full" : "") + "'>" + taken + " / " + CAP + " personas</span></div>" +
+            "<table><thead><tr><th>Persona</th><th>Tour</th><th>Pers.</th><th class='contact-hide'>Contacto</th></tr></thead><tbody>" +
+            rowsHtml + "</tbody></table></div>";
+        }).join("");
+      }
+
+      function esc(s) { return String(s).replace(/[&<>"]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c])); }
+    </script>
+  </body>
+</html>
